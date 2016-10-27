@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 require_relative '../test_helper'
 
-SingleCov.covered! uncovered: 37
+SingleCov.covered! uncovered: 36
 
 describe Job do
   include GitRepoTestHelper
 
   before { Project.any_instance.stubs(:valid_repository_url).returns(true) }
   let(:url) { "git://foo.com:hello/world.git" }
-  let(:user) { User.create!(name: 'test') }
+  let(:user) { users(:admin) }
   let(:project) { Project.create!(name: 'jobtest', repository_url: url) }
   let(:job) { project.jobs.create!(command: 'cat foo', user: user, project: project) }
 
